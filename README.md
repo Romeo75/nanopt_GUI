@@ -1,4 +1,4 @@
-# nanopt_GUI
+# luminescence GUI
 
 ## Interface for the luminescence of the nanoparticles
 
