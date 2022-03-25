@@ -22,7 +22,7 @@ function varargout = Main(varargin)
 
     % Edit the above text to modify the response to help Main
 
-    % Last Modified by GUIDE v2.5 18-Mar-2022 18:52:06
+    % Last Modified by GUIDE v2.5 25-Mar-2022 12:35:07
 
     % Begin initialization code - DO NOT EDIT
     gui_Singleton = 1;
@@ -218,7 +218,19 @@ function pushbutton7_Callback(hObject, eventdata, handles)
     % hObject    handle to pushbutton7 (see GCBO)
     % eventdata  reserved - to be defined in a future version of MATLAB
     % handles    structure with handles and user data (see GUIDATA)
-    [processed_data, processed_image, background] = NoiseCorrection(handles.lumi_raw_data, handles.lumi_raw_image);
+
+    %This checks wich Noise Selection tool should be used to treat the images
+    %The input of the tool function:
+    %   should always be the same, raw data matrix and raw image matrix
+    %The output of the tool function:
+    %   should always be the same, processed_data matrix, processed image,
+    %   and bakcground
+    if (handles.radiobutton2.Value)
+        [processed_data, processed_image, background] = LinearNoiseCorrection(handles.lumi_raw_data, handles.lumi_raw_image);
+    else
+        [processed_data, processed_image, background] = AverageRegionNoiseCorrection(handles.lumi_raw_data, handles.lumi_raw_image);
+    end
+    
     handles.processed_data = processed_data;
     handles.processed_image = processed_image;
 
@@ -286,3 +298,28 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
     % hObject    handle to figure1 (see GCBO)
     % eventdata  reserved - to be defined in a future version of MATLAB
     % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in radiobutton2.
+function radiobutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of radiobutton2
+
+
+% --- Executes on button press in radiobutton3.
+function radiobutton3_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobutton3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of radiobutton3
+
+
+% --- Executes during object creation, after setting all properties.
+function radiobutton2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to radiobutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called

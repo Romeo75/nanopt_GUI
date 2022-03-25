@@ -1,15 +1,15 @@
-function varargout = NoiseCorrection(varargin)
-    % NOISECORRECTION MATLAB code for NoiseCorrection.fig
-    %      NOISECORRECTION, by itself, creates a new NOISECORRECTION or raises the existing
+function varargout = LinearNoiseCorrection(varargin)
+    % LinearNoiseCorrection MATLAB code for LinearNoiseCorrection.fig
+    %      LinearNoiseCorrection, by itself, creates a new LinearNoiseCorrection or raises the existing
     %      singleton*.
     %
-    %      H = NOISECORRECTION returns the handle to a new NOISECORRECTION or the handle to
+    %      H = LinearNoiseCorrection returns the handle to a new LinearNoiseCorrection or the handle to
     %      the existing singleton*.
     %
-    %      NOISECORRECTION('CALLBACK',hObject,eventData,handles,...) calls the local
-    %      function named CALLBACK in NOISECORRECTION.M with the given input arguments.
+    %      LinearNoiseCorrection('CALLBACK',hObject,eventData,handles,...) calls the local
+    %      function named CALLBACK in LinearNoiseCorrection.M with the given input arguments.
     %
-    %      NOISECORRECTION('Property','Value',...) creates a new NOISECORRECTION or raises the
+    %      LinearNoiseCorrection('Property','Value',...) creates a new LinearNoiseCorrection or raises the
     %      existing singleton*.  Starting from the left, property value pairs are
     %      applied to the GUI before NoiseCorrection_OpeningFcn gets called.  An
     %      unrecognized property name or invalid value makes property application
@@ -20,9 +20,9 @@ function varargout = NoiseCorrection(varargin)
     %
     % See also: GUIDE, GUIDATA, GUIHANDLES
 
-    % Edit the above text to modify the response to help NoiseCorrection
+    % Edit the above text to modify the response to help LinearNoiseCorrection
 
-    % Last Modified by GUIDE v2.5 18-Mar-2022 18:52:29
+    % Last Modified by GUIDE v2.5 25-Mar-2022 17:00:01
 
     % Begin initialization code - DO NOT EDIT
     gui_Singleton = 1;
@@ -84,8 +84,8 @@ function [hObject, eventdata, handles] = plot_pixel_histogram(hObject, eventdata
 
     %data formating
     N = numel(pixel_spectrum); % Number of wavelengths considered in the spectrum
-    lambda = pixel_spectrum(mod(1:N, 2) == 1); % Extrect the lambdas from the data array of the pixel
-    counts = pixel_spectrum(mod(1:N, 2) == 0); % Extrect the counts from the data array of the pixel
+    lambda = pixel_spectrum(1:2:end); % Extrect the lambdas from the data array of the pixel
+    counts = pixel_spectrum(2:2:end); % Extrect the counts from the data array of the pixel
 
     %save data to start processing
     handles.lambda = lambda;
@@ -105,15 +105,15 @@ function [hObject, eventdata, handles] = plot_pixel_histogram(hObject, eventdata
 %   end of local functions
 %___________________________________________
 
-% --- Executes just before NoiseCorrection is made visible.
+% --- Executes just before LinearNoiseCorrection is made visible.
 function NoiseCorrection_OpeningFcn(hObject, eventdata, handles, varargin)
     % This function has no output args, see OutputFcn.
     % hObject    handle to figure
     % eventdata  reserved - to be defined in a future version of MATLAB
     % handles    structure with handles and user data (see GUIDATA)
-    % varargin   command line arguments to NoiseCorrection (see VARARGIN)
+    % varargin   command line arguments to LinearNoiseCorrection (see VARARGIN)
 
-    % Choose default command line output for NoiseCorrection
+    % Choose default command line output for LinearNoiseCorrection
     handles.processed_image = hObject;
     handles.lumi_raw_data = varargin{1};
     handles.lumi_raw_image = varargin{2};
@@ -137,7 +137,7 @@ function NoiseCorrection_OpeningFcn(hObject, eventdata, handles, varargin)
 
     % Update handles structure
     guidata(hObject, handles);
-    % UIWAIT makes NoiseCorrection wait for user response (see UIRESUME)
+    % UIWAIT makes LinearNoiseCorrection wait for user response (see UIRESUME)
     uiwait(handles.Noise);
 
 % --- Outputs from this function are returned to the command line.
@@ -402,7 +402,7 @@ function pushbutton6_Callback(hObject, eventdata, handles)
     guidata(hObject, handles); % This saves all of the data saved in handles as variables for later use
 
 % --- Executes when user attempts to close Noise.
-function Noise_CloseRequestFcn(hObject, eventdata, handles)
+0
     % hObject    handle to Noise (see GCBO)
     % eventdata  reserved - to be defined in a future version of MATLAB
     % handles    structure with handles and user data (see GUIDATA)
@@ -416,3 +416,20 @@ function Noise_DeleteFcn(hObject, eventdata, handles)
     % handles    structure with handles and user data (see GUIDATA)
 
     uiresume(handles.Noise)
+
+
+% --- Executes during object creation, after setting all properties.
+function Noise_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to Noise (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+
+% --- Executes when user attempts to close Noise.
+function Noise_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to Noise (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: delete(hObject) closes the figure
+delete(hObject);
