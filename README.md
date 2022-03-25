@@ -1,6 +1,7 @@
 # luminescence GUI
 
-## Interface for the luminescence of the nanoparticles
+## Sumary
+This interface is used for...
 
 ### Code spreadsheet and upcomming upgrades :shipit:
 
