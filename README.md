@@ -3,6 +3,11 @@
 ## Sumary
 This interface is used for...
 
+## Requirements
+* MATLAB (latest release adviced)
+* Image processing toolbox
+* Curve fitting toolbox
+
 ### Code spreadsheet and upcomming upgrades :shipit:
 
 * Link to the Notion page:
