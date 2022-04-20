@@ -1,7 +1,6 @@
 
 %%input variables
-'D:\Obren\Ordered\20220415_data\528\BG0 528 0.2s.txt'
-'D:\Obren\Ordered\20220415_raw-spectra\528\exp_1\2022.04.15_0.txt'
+
 
 %Load the .TXT files inside the folder
 [Folder, Files]=Load_TXT_Folder("D:\Obren\Ordered\20220415_raw-spectra\528\exp_1");
@@ -129,7 +128,7 @@ function [SubData]=SubAvanced(AllData,N_pixels,BG_intensity,lambda)
             xlabel("Wavelength (in nm)",'Parent',gca)
             ylabel("Bin Count",'Parent',gca)
             hold on
-            plot(lambda,AllData(i,:),'Parent',gca,'DisplayName','Corrected')
+
         end
     end
 
